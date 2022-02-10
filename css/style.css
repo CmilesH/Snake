@@ -1,0 +1,42 @@
+html {
+  box-sizing: border-box
+}
+
+/* The Universal Selector */
+*, /* All elements*/
+*::before, /* All ::before pseudo-elements */
+*::after { /* All ::after pseudo-elements */
+  /* height & width will now include border & padding by default
+     but can be over-ridden as needed */
+  box-sizing: inherit;
+}
+
+/* resets font size to be 62.5% of the user preference - 
+     in most browser configurations this will be 10px */
+:root {
+  font-size: 62.5%;
+}
+
+body {
+  background-color: gray;
+  /* Use a system font, if none are available use an available sans-sarif font */
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  margin: 0;
+  display: grid;
+  min-height: 100vh;
+  justify-content: center;
+  grid-template-columns: 20% 60% 20%;
+  grid-template-rows: 25% 50% 25%;
+}
+
+.play-area {
+  background-color: wheat;
+  grid-column: 2;
+  grid-row: 2;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  grid-template: repeat(25, 1fr) / repeat(50, 1fr);
+}
