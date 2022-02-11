@@ -27,7 +27,7 @@ body {
   min-height: 100vh;
   justify-content: center;
   grid-template-columns: 20% 60% 20%;
-  grid-template-rows: 25% 50% 25%;
+  grid-template-rows: auto 600px auto;
 }
 
 .play-area {
