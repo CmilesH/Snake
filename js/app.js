@@ -1,11 +1,11 @@
 /*-------------------------------- Constants --------------------------------*/
 const gameField = document.getElementById('field')
-const fieldCtx = gameField.get('2d')
+const fieldCtx = gameField.getContext('2d')
 
 
 /*---------------------------- Variables (state) ----------------------------*/
 
-let snake = [  {x: 200, y: 200},  {x: 190, y: 200},  {x: 180, y: 200},  {x: 170, y: 200},  {x: 160, y: 200},];
+let snake = [  {x: 200, y: 300},  {x: 190, y: 300},  {x: 180, y: 300},  {x: 170, y: 300},  {x: 160, y: 300},]
 
 /*------------------------ Cached Element References ------------------------*/
 
@@ -17,16 +17,13 @@ let snake = [  {x: 200, y: 200},  {x: 190, y: 200},  {x: 180, y: 200},  {x: 170,
 
 /*-------------------------------- Functions --------------------------------*/
 
-function drawSnakePart(snakePart) 
-{  
-  snakeboard_ctx.fillStyle = 'lightblue';  
-  snakeboard_ctx.strokestyle = 'darkblue';
-  snakeboard_ctx.fillRect(snakePart.x, snakePart.y, 10, 10);  
-  snakeboard_ctx.strokeRect(snakePart.x, snakePart.y, 10, 10);
+function drawSnakePart(snakePart) {  
+  fieldCtx.fillStyle = 'black';  
+  fieldCtx.fillRect(snakePart.x, snakePart.y, 10, 10);  
 }
  
-/*Function that prints the parts*/
-function drawSnake() 
-{  
+function drawSnake() {  
   snake.forEach(drawSnakePart);
 }
+
+drawSnake()
