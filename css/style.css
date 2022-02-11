@@ -34,9 +34,15 @@ body {
   background-color: wheat;
   grid-column: 2;
   grid-row: 2;
-  display: grid;
+  display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  grid-template: repeat(25, 1fr) / repeat(50, 1fr);
+
+}
+
+#field {
+  background-color: white;
+  border: solid;
+  border-color: black;
 }
