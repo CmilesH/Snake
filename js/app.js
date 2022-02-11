@@ -1,6 +1,6 @@
 /*-------------------------------- Constants --------------------------------*/
 const gameField = document.getElementById('field')
-const fieldCtx = document.getElementById('2d')
+const fieldCtx = gameField.get('2d')
 
 
 /*---------------------------- Variables (state) ----------------------------*/
