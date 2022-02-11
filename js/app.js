@@ -16,7 +16,10 @@ const fieldCtx = gameField.getContext('2d')
 
 /*----------------------------- Event Listeners -----------------------------*/
 
-
+keyPress = document.addEventListener('keydown', (e) => {
+  e.code
+  console.log(e.code)
+})
 
 /*-------------------------------- Functions --------------------------------*/
 
@@ -25,7 +28,7 @@ function render() {
     clearBoard()
     drawSnake()
     moveSnake()
-    console.log(newHead, snakeHead, snake[0])
+    
   }, 100)
 }
 
