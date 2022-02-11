@@ -35,7 +35,7 @@ function init(){
 function render() {
   setInterval(() => {
     checkDirection()
-    // moveSnake()
+    moveSnake()
     checkCollision()
     clearBoard()
     drawSnake()
@@ -94,10 +94,13 @@ function checkCollision() {
   
   if (hitChecks.some((e) => e == true)){
     return true
-  // } else if {
-    
-  } else false
+  }
 
+  for (i = 1; i < snake.length; i++) {
+    if (snake[i].x === snake[0].x && snake[i].y === snake[0].y){
+      return true
+    }
+  }
 }
 
 init()
