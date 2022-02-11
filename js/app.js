@@ -8,7 +8,8 @@ let snake = [{x: 200, y: 300},  {x: 190, y: 300},  {x: 180, y: 300},  {x: 170, y
 let snakeHead = snake [0]
 let dx = 10
 let dy = 0
-let direction = ''
+let direction = 'right'
+let changeDirection = ''
 /*------------------------ Cached Element References ------------------------*/
 
 const gameField = document.getElementById('field')
@@ -18,7 +19,7 @@ const fieldCtx = gameField.getContext('2d')
 /*----------------------------- Event Listeners -----------------------------*/
 
 keyPress = document.addEventListener('keydown', (e) => {
-  direction = e.code
+  changeDirection = e.code
   console.log(direction)
 })
 
@@ -26,7 +27,6 @@ keyPress = document.addEventListener('keydown', (e) => {
 
 function render() {
   setInterval(() => {
-    console.log(direction)
     checkDirection()
     clearBoard()
     drawSnake()
@@ -36,16 +36,20 @@ function render() {
 }
 
 function checkDirection() {
-  if (direction == 'ArrowUp'){
+  if (changeDirection == 'ArrowUp' && direction != 'down'){
+    direction = 'up'
     dy = -10
     dx = 0
-  } else if (direction == 'ArrowLeft'){
+  } else if (changeDirection == 'ArrowLeft' && direction != 'right'){
+    direction = 'left'
     dy = 0
     dx = -10
-  } else if (direction == 'ArrowDown'){
+  } else if (changeDirection == 'ArrowDown' && direction != 'up'){
+    direction = 'down'
     dy = 10
     dx = 0
-  } else if (direction == 'ArrowRight'){
+  } else if (changeDirection == 'ArrowRight' && direction != 'left'){
+    direction = 'right'
     dy = 0
     dx = 10
   }
@@ -72,4 +76,8 @@ function moveSnake() {
   snake.pop()
 }
 
+function checkCollision() {
+
+
+}
 render()
