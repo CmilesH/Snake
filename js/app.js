@@ -1,6 +1,7 @@
 /*-------------------------------- Constants --------------------------------*/
 
-const snakeColor = 'black'
+const snakeColor = 'white'
+
 
 /*---------------------------- Variables (state) ----------------------------*/
 
@@ -10,6 +11,7 @@ let dx = 10
 let dy = 0
 let direction = 'right'
 let changeDirection = ''
+
 /*------------------------ Cached Element References ------------------------*/
 
 const gameField = document.getElementById('field')
@@ -25,14 +27,20 @@ keyPress = document.addEventListener('keydown', (e) => {
 
 /*-------------------------------- Functions --------------------------------*/
 
+function init(){
+  clearBoard()
+  render()
+}
+
 function render() {
   setInterval(() => {
     checkDirection()
+    // moveSnake()
+    checkCollision()
     clearBoard()
     drawSnake()
-    moveSnake()
-    
-  }, 100)
+    console.log(checkCollision())
+  }, 150)
 }
 
 function checkDirection() {
@@ -56,28 +64,40 @@ function checkDirection() {
 }
 
 function clearBoard() {
-  fieldCtx.fillStyle = 'white'
+  fieldCtx.fillStyle = 'purple'
   fieldCtx.fillRect(0, 0, gameField.width, gameField.height)
 }
 
 function drawSnakePart(snakePart) {  
-  fieldCtx.fillStyle = snakeColor;  
-  fieldCtx.fillRect(snakePart.x, snakePart.y, 10, 10);  
+  fieldCtx.fillStyle = snakeColor  
+  fieldCtx.fillRect(snakePart.x, snakePart.y, 10, 10)
 }
 
 function drawSnake() {  
-  snake.forEach(drawSnakePart);
+  snake.forEach(drawSnakePart)
 }
 
 function moveSnake() {
   snakeHead = snake[0]
-  newHead = {x: snakeHead.x + dx , y: snakeHead.y + dy}
+  const newHead = {x: snakeHead.x + dx , y: snakeHead.y + dy}
   snake.unshift(newHead)
   snake.pop()
 }
 
 function checkCollision() {
+  const hitLeftWall = snakeHead.x < 0
+  const hitRightWall = snakeHead.x > 600
+  const hitTopWall = snakeHead.y < 0
+  const hitBottomWall = snakeHead > 600
 
+  hitChecks = [hitLeftWall, hitRightWall, hitTopWall, hitBottomWall]
+  
+  if (hitChecks.some((e) => e == true)){
+    return true
+  // } else if {
+    
+  } else false
 
 }
-render()
+
+init()
