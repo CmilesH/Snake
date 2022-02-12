@@ -5,17 +5,18 @@ const snakeColor = 'white'
 
 /*---------------------------- Variables (state) ----------------------------*/
 
-let snake = [{x: 200, y: 300},  {x: 190, y: 300},  {x: 180, y: 300},  {x: 170, y: 300},  {x: 160, y: 300}]
+let snake = [204, 203, 202, 201, 200]
 let snakeHead = snake [0]
-let dx = 10
-let dy = 0
+let movement = 1
 let direction = 'right'
 let changeDirection = ''
+let squares = []
+let newHead 
+let endGame = false
 
 /*------------------------ Cached Element References ------------------------*/
 
-const gameField = document.getElementById('field')
-const fieldCtx = gameField.getContext('2d')
+const gameField = document.getElementById('play-area')
 
 
 /*----------------------------- Event Listeners -----------------------------*/
@@ -28,49 +29,62 @@ keyPress = document.addEventListener('keydown', (e) => {
 /*-------------------------------- Functions --------------------------------*/
 
 function init(){
-  clearBoard()
+  generateBoard()
+  drawSnake()
+  // clearBoard()
   render()
+  
 }
 
-function render() {
-  setInterval(() => {
-    checkDirection()
-    moveSnake()
-    checkCollision()
-    clearBoard()
-    drawSnake()
-    console.log(checkCollision())
-  }, 150)
+function render() { 
+    play = setInterval(() => {
+      checkDirection()
+      moveSnake();
+      checkEnd()
+      clearBoard()
+      drawSnake()
+    
+    console.log(endGame)
+    console.log(newHead)
+  }, 100)
+  
+  
 }
 
 function checkDirection() {
   if (changeDirection == 'ArrowUp' && direction != 'down'){
     direction = 'up'
-    dy = -10
-    dx = 0
+    movement = -20
   } else if (changeDirection == 'ArrowLeft' && direction != 'right'){
     direction = 'left'
-    dy = 0
-    dx = -10
+    movement = -1
   } else if (changeDirection == 'ArrowDown' && direction != 'up'){
     direction = 'down'
-    dy = 10
-    dx = 0
+    movement = 20
   } else if (changeDirection == 'ArrowRight' && direction != 'left'){
     direction = 'right'
-    dy = 0
-    dx = 10
+    movement = 1
   }
 }
 
 function clearBoard() {
-  fieldCtx.fillStyle = 'purple'
-  fieldCtx.fillRect(0, 0, gameField.width, gameField.height)
+  squares.forEach(e => {
+    e.style.backgroundColor = 'purple'
+  })
+}
+
+function generateBoard() {
+  for (i= 1; i < 401; i++){
+    let square = document.createElement('div')
+    square.setAttribute('class', 'square')
+    square.setAttribute('id', `${i}`)
+    gameField.appendChild(square)
+    squares.push(document.getElementById(i))
+  }
 }
 
 function drawSnakePart(snakePart) {  
-  fieldCtx.fillStyle = snakeColor  
-  fieldCtx.fillRect(snakePart.x, snakePart.y, 10, 10)
+  squares[snakePart].style.backgroundColor = snakeColor
 }
 
 function drawSnake() {  
@@ -79,28 +93,39 @@ function drawSnake() {
 
 function moveSnake() {
   snakeHead = snake[0]
-  const newHead = {x: snakeHead.x + dx , y: snakeHead.y + dy}
+  newHead = snakeHead + movement
+  checkCollision()
+  if (endGame!= true){
   snake.unshift(newHead)
   snake.pop()
+  } else if (endGame === true){
+    console.log(checkCollision())
+    clearInterval()
+  }
 }
 
 function checkCollision() {
-  const hitLeftWall = snakeHead.x < 0
-  const hitRightWall = snakeHead.x > 600
-  const hitTopWall = snakeHead.y < 0
-  const hitBottomWall = snakeHead > 600
+  const hitLeftWall = ((newHead % 20 === 1) && direction === 'left')
+  const hitRightWall = ((newHead % 20 === 0) && direction === 'right')
+  const hitTopWall = newHead < 0
+  const hitBottomWall = newHead > 400
 
   hitChecks = [hitLeftWall, hitRightWall, hitTopWall, hitBottomWall]
   
-  if (hitChecks.some((e) => e == true)){
-    return true
+  if (hitChecks.some(e => e === true)){
+    endGame = true
   }
 
   for (i = 1; i < snake.length; i++) {
-    if (snake[i].x === snake[0].x && snake[i].y === snake[0].y){
-      return true
+    if (snake[i] === newHead){
+      endGame = true
     }
   }
 }
 
+function checkEnd(){
+  if (endGame === true) {
+    clearInterval(play)
+  }
+}
 init()
