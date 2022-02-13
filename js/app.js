@@ -25,7 +25,6 @@ const gameField = document.getElementById('play-area')
 
 keyPress = document.addEventListener('keydown', (e) => {
   changeDirection = e.code
-  console.log(direction)
 })
 
 /*-------------------------------- Functions --------------------------------*/
@@ -33,29 +32,48 @@ keyPress = document.addEventListener('keydown', (e) => {
 function init(){
   generateBoard()
   drawSnake()
-  // clearBoard()
-  render()
-  
+  makeApple()
+  render() 
 }
 
 function render() { 
-    play = setInterval(() => {
-      checkDirection()
-      moveSnake();
-      checkEnd()
+  if (endGame != true){
+    play = setTimeout(() => {
+      moveSnake()
       clearBoard()
-      drawSnake()
-      genApple()
       makeApple()
-    
-    console.log(apple)
-    
-  }, 100)
-  
-  
+      drawSnake()
+      render()
+    }, 100)
+  }
 }
 
-function checkDirection() {
+  function generateBoard() {
+    for (i= 1; i < 2501; i++){
+      let square = document.createElement('div')
+      square.setAttribute('class', 'square')
+      square.setAttribute('id', `${i}`)
+      gameField.appendChild(square)
+      squares.push(document.getElementById(i))
+    }
+  }
+  
+  function clearBoard() {
+    squares.forEach(e => {
+      e.style.backgroundColor = 'purple'
+    })
+  }
+
+function drawSnakePart(snakePart) {  
+  squares[snakePart - 1].style.backgroundColor = snakeColor
+}
+
+function drawSnake() {  
+  snake.forEach(drawSnakePart)
+  squares[snake[0] - 1].style.backgroundColor = 'red'
+}
+
+async function moveSnake() {
   if (changeDirection == 'ArrowUp' && direction != 'down'){
     direction = 'up'
     movement = -50
@@ -69,74 +87,49 @@ function checkDirection() {
     direction = 'right'
     movement = 1
   }
-}
 
-function clearBoard() {
-  squares.forEach(e => {
-    e.style.backgroundColor = 'purple'
-  })
-}
-
-function generateBoard() {
-  for (i= 1; i < 2501; i++){
-    let square = document.createElement('div')
-    square.setAttribute('class', 'square')
-    square.setAttribute('id', `${i}`)
-    gameField.appendChild(square)
-    squares.push(document.getElementById(i))
-  }
-}
-
-function drawSnakePart(snakePart) {  
-  squares[snakePart].style.backgroundColor = snakeColor
-}
-
-function drawSnake() {  
-  snake.forEach(drawSnakePart)
-}
-
-function moveSnake() {
   snakeHead = snake[0]
   newHead = snakeHead + movement
+
   checkCollision()
-  if (endGame!= true){
+  await checkCollision()
+
+  if (endGame != true){
   snake.unshift(newHead)
   snake.pop()
+  snakeHead = snake[0]
   } else if (endGame === true){
-    console.log(checkCollision())
-    clearInterval()
+    clearTimeout(play)
   }
 }
 
 function checkCollision() {
-  const hitLeftWall = ((newHead % 50 === 1) && direction === 'left')
-  const hitRightWall = ((newHead % 50 === 0) && direction === 'right')
+  snakeBody = snake.slice(1).map(e => e)
+  const hitLeftWall = ((snakeHead % 50 === 1) && direction === 'left')
+  const hitRightWall = ((snakeHead % 50 === 0) && direction === 'right')
   const hitTopWall = newHead < 0
   const hitBottomWall = newHead > 2500
+  const hitBody = (snakeBody.some(e => e === newHead))
 
-  hitChecks = [hitLeftWall, hitRightWall, hitTopWall, hitBottomWall]
+  hitChecks = [hitLeftWall, hitRightWall, hitTopWall, hitBottomWall, hitBody]
   
   if (hitChecks.some(e => e === true)){
     endGame = true
   }
 
-  for (i = 1; i < snake.length; i++) {
-    if (snake[i] === newHead){
-      endGame = true
-    }
-  }
-}
-
-function checkEnd(){
-  if (endGame === true) {
-    clearInterval(play)
+  if (apple === snakeHead){
+    snake.push(snake[snake.length - 1])
+    genApple()
+    makeApple()
   }
 }
 
 function genApple(){
   apple = Math.floor(Math.random() * 2500 + 1)
 }
+
 function makeApple() {
-  squares[apple].style.backgroundColor = appleColor
+  squares[apple - 1].style.backgroundColor = appleColor
 }
+
 init()
