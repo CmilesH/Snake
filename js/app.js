@@ -5,7 +5,9 @@ const snakeColor = 'white'
 
 /*---------------------------- Variables (state) ----------------------------*/
 
-let snake = [204, 203, 202, 201, 200]
+let snake = [1255, 1254, 1253, 1252, 1251]
+let apple = 1290
+let appleColor = 'green'
 let snakeHead = snake [0]
 let movement = 1
 let direction = 'right'
@@ -43,9 +45,11 @@ function render() {
       checkEnd()
       clearBoard()
       drawSnake()
+      genApple()
+      makeApple()
     
-    console.log(endGame)
-    console.log(newHead)
+    console.log(apple)
+    
   }, 100)
   
   
@@ -54,13 +58,13 @@ function render() {
 function checkDirection() {
   if (changeDirection == 'ArrowUp' && direction != 'down'){
     direction = 'up'
-    movement = -20
+    movement = -50
   } else if (changeDirection == 'ArrowLeft' && direction != 'right'){
     direction = 'left'
     movement = -1
   } else if (changeDirection == 'ArrowDown' && direction != 'up'){
     direction = 'down'
-    movement = 20
+    movement = 50
   } else if (changeDirection == 'ArrowRight' && direction != 'left'){
     direction = 'right'
     movement = 1
@@ -74,7 +78,7 @@ function clearBoard() {
 }
 
 function generateBoard() {
-  for (i= 1; i < 401; i++){
+  for (i= 1; i < 2501; i++){
     let square = document.createElement('div')
     square.setAttribute('class', 'square')
     square.setAttribute('id', `${i}`)
@@ -105,10 +109,10 @@ function moveSnake() {
 }
 
 function checkCollision() {
-  const hitLeftWall = ((newHead % 20 === 1) && direction === 'left')
-  const hitRightWall = ((newHead % 20 === 0) && direction === 'right')
+  const hitLeftWall = ((newHead % 50 === 1) && direction === 'left')
+  const hitRightWall = ((newHead % 50 === 0) && direction === 'right')
   const hitTopWall = newHead < 0
-  const hitBottomWall = newHead > 400
+  const hitBottomWall = newHead > 2500
 
   hitChecks = [hitLeftWall, hitRightWall, hitTopWall, hitBottomWall]
   
@@ -127,5 +131,12 @@ function checkEnd(){
   if (endGame === true) {
     clearInterval(play)
   }
+}
+
+function genApple(){
+  apple = Math.floor(Math.random() * 2500 + 1)
+}
+function makeApple() {
+  squares[apple].style.backgroundColor = appleColor
 }
 init()
