@@ -15,10 +15,12 @@ let changeDirection = ''
 let squares = []
 let newHead 
 let endGame = false
+let score = 0
 
 /*------------------------ Cached Element References ------------------------*/
 
 const gameField = document.getElementById('play-area')
+const currScore = document.getElementById('game-info')
 
 
 /*----------------------------- Event Listeners -----------------------------*/
@@ -44,7 +46,7 @@ function render() {
       makeApple()
       drawSnake()
       render()
-    }, 100)
+    }, 50)
   }
 }
 
@@ -70,7 +72,6 @@ function drawSnakePart(snakePart) {
 
 function drawSnake() {  
   snake.forEach(drawSnakePart)
-  squares[snake[0] - 1].style.backgroundColor = 'red'
 }
 
 async function moveSnake() {
@@ -119,6 +120,8 @@ function checkCollision() {
 
   if (apple === snakeHead){
     snake.push(snake[snake.length - 1])
+    score = score + 25
+    currScore.textContent = `Score: ${score}`
     genApple()
     makeApple()
   }

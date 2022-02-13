@@ -35,9 +35,26 @@ body {
   grid-column: 2;
   grid-row: 2;
   display: flex;
-  /* align-items: stretch; */
   flex-wrap: wrap;
+  margin: 0;
 }
+
+.information {
+  position: relative;
+  grid-column: 2;
+  text-align: center;
+}
+
+#game-info {
+  position: absolute;
+  bottom: 0;
+  left: 25%;
+  right: 25%;
+  font-size: 50px;
+  
+}
+
+
 
 .square {
   background-color: purple;
