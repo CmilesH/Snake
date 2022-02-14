@@ -16,11 +16,12 @@ let squares = []
 let newHead 
 let endGame = false
 let score = 0
-
+let gameState = 'menu'
 /*------------------------ Cached Element References ------------------------*/
 
 const gameField = document.getElementById('play-area')
 const currScore = document.getElementById('game-info')
+const playBtn = document.getElementById('play-btn')
 
 
 /*----------------------------- Event Listeners -----------------------------*/
@@ -29,6 +30,12 @@ keyPress = document.addEventListener('keydown', (e) => {
   changeDirection = e.code
 })
 
+playBtn.addEventListener('click', function() {
+  gameField.style.display = 'flex'
+  playBtn.style.visibility = 'hidden'
+  init()
+
+})
 /*-------------------------------- Functions --------------------------------*/
 
 function init(){
@@ -129,10 +136,13 @@ function checkCollision() {
 
 function genApple(){
   apple = Math.floor(Math.random() * 2500 + 1)
+  if (snake.some(e => e === apple)){
+    genApple()
+  }
 }
 
 function makeApple() {
   squares[apple - 1].style.backgroundColor = appleColor
 }
 
-init()
+

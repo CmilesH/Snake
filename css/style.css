@@ -34,7 +34,7 @@ body {
   background-color: wheat;
   grid-column: 2;
   grid-row: 2;
-  display: flex;
+  /* display: flex; */
   flex-wrap: wrap;
   margin: 0;
 }
@@ -54,10 +54,41 @@ body {
   
 }
 
-
-
 .square {
   background-color: purple;
   height: 12px;
   width: 12px; 
+}
+
+.menu {
+  display: flex;
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+}
+
+#main-menu {
+  margin: auto;
+  width: 100px;
+  height: 100px;
+  align-items: center;
+  padding-top: 45px;
+}
+
+#end-menu {
+  background-color: white;
+  border: solid;
+  position: fixed;
+  height: 400px;
+  width: 300px;
+  /* display: grid; */
+}
+
+#score {
+  margin: auto;
 }
