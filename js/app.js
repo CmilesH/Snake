@@ -5,16 +5,16 @@ const snakeColor = 'white'
 
 /*---------------------------- Variables (state) ----------------------------*/
 
-let snake = [1255, 1254, 1253, 1252, 1251]
-let apple = 1290
-let appleColor = 'green'
-let snakeHead = snake [0]
-let movement = 1
-let direction = 'right'
+let snake = []
+let apple 
+let appleColor 
+let snakeHead 
+let movement
+let direction = ''
 let changeDirection = ''
 let squares = []
 let newHead 
-let endGame = false
+let playing = false
 let score = 0
 let gameState = 'menu'
 /*------------------------ Cached Element References ------------------------*/
@@ -22,6 +22,9 @@ let gameState = 'menu'
 const gameField = document.getElementById('play-area')
 const currScore = document.getElementById('game-info')
 const playBtn = document.getElementById('play-btn')
+const resultMenu = document.getElementById('end-menu')
+const retryBtn = document.getElementById('retry-btn')
+const finalScore = document.getElementById('score')
 
 
 /*----------------------------- Event Listeners -----------------------------*/
@@ -33,39 +36,67 @@ keyPress = document.addEventListener('keydown', (e) => {
 playBtn.addEventListener('click', function() {
   gameField.style.display = 'flex'
   playBtn.style.visibility = 'hidden'
+  playing = true
   init()
+
+})
+
+retryBtn.addEventListener('click', function(){
+  init()
+  initVars()
+  updateScore()
+  resultMenu.style.visibility = 'hidden'
+  resultMenu.style.display = 'none'
 
 })
 /*-------------------------------- Functions --------------------------------*/
 
+function initVars() {
+  snake = [1255, 1254, 1253, 1252, 1251]
+  apple = 1290
+  appleColor = 'green'
+  snakeHead = snake [0]
+  movement = 1
+  direction = 'right'
+  changeDirection = ''
+  playing = true
+  score = 0
+}
+
 function init(){
-  generateBoard()
+  if (gameState === 'menu'){
+    generateBoard()
+    gameState = 'playing'
+  }
+  initVars()
+  clearBoard()
   drawSnake()
   makeApple()
   render() 
+  
 }
 
 function render() { 
-  if (endGame != true){
+  if (playing === true){
     play = setTimeout(() => {
       moveSnake()
       clearBoard()
       makeApple()
       drawSnake()
-      render()
+      render()  
     }, 50)
   }
 }
 
-  function generateBoard() {
-    for (i= 1; i < 2501; i++){
-      let square = document.createElement('div')
-      square.setAttribute('class', 'square')
+function generateBoard() {
+  for (i= 1; i < 2501; i++){
+    let square = document.createElement('div')
+    square.setAttribute('class', 'square')
       square.setAttribute('id', `${i}`)
       gameField.appendChild(square)
       squares.push(document.getElementById(i))
-    }
   }
+}
   
   function clearBoard() {
     squares.forEach(e => {
@@ -102,11 +133,11 @@ async function moveSnake() {
   checkCollision()
   await checkCollision()
 
-  if (endGame != true){
+  if (playing === true){
   snake.unshift(newHead)
   snake.pop()
   snakeHead = snake[0]
-  } else if (endGame === true){
+  } else if (playing != true){
     clearTimeout(play)
   }
 }
@@ -122,13 +153,13 @@ function checkCollision() {
   hitChecks = [hitLeftWall, hitRightWall, hitTopWall, hitBottomWall, hitBody]
   
   if (hitChecks.some(e => e === true)){
-    endGame = true
+    endGame()
   }
 
   if (apple === snakeHead){
     snake.push(snake[snake.length - 1])
     score = score + 25
-    currScore.textContent = `Score: ${score}`
+    updateScore()
     genApple()
     makeApple()
   }
@@ -145,4 +176,13 @@ function makeApple() {
   squares[apple - 1].style.backgroundColor = appleColor
 }
 
+function updateScore() {
+  currScore.textContent = `Score: ${score}`
+}
 
+function endGame() {
+  playing = false
+  resultMenu.style.visibility = 'visible'
+  resultMenu.style.display = 'grid'
+  finalScore.textContent = `Final Score: ${score}`
+}
