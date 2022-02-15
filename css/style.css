@@ -33,10 +33,22 @@ body {
 #game-window {
   position: fixed;
   z-index: 3;
+  /* background-color: black;
+  width: 605px;
+  height: 650px; */
+  margin-bottom: 25px;
+  z-index: 3;
+}
+
+/* #window-background {
   background-color: black;
   width: 605px;
   height: 650px;
-  margin-bottom: 10px;
+  position: fixed;
+} */
+
+#game-window > img {
+  z-index: 2
 }
 
 #play-area {
@@ -57,9 +69,11 @@ body {
 }
 
 #game-info {
+  width: 603px;
+  background-color: black;
   color: white;
   font-family: 'DotGothic16', sans-serif;
-  font-size: 25px;
+  font-size: 17px;
 }
 
 .square {
@@ -114,5 +128,5 @@ body {
   background-color: aqua;
   width: 1100px;
   height: 850px;
-  z-index: 3;
+  z-index: 2;
 } 
