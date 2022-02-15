@@ -25,7 +25,7 @@ const playBtn = document.getElementById('play-btn')
 const resultMenu = document.getElementById('end-menu')
 const retryBtn = document.getElementById('retry-btn')
 const finalScore = document.getElementById('score')
-const gameInfo = document.getElementsByClassName('information')
+const scoreInfo = document.getElementById('score-info')
 
 
 /*----------------------------- Event Listeners -----------------------------*/
@@ -97,12 +97,12 @@ function generateBoard() {
       gameField.appendChild(square)
       squares.push(document.getElementById(i))
   }
-  gameInfo.style.visibility = 'visible'
+  scoreInfo.style.display = 'block'
 }
   
   function clearBoard() {
     squares.forEach(e => {
-      e.style.backgroundColor = 'purple'
+      e.style.backgroundColor = 'black'
     })
   }
 

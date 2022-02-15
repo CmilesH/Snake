@@ -30,28 +30,40 @@ body {
   flex-direction: column;
 }
 
+#game-window {
+  position: fixed;
+  z-index: 3;
+  background-color: black;
+  width: 605px;
+  height: 650px;
+  margin-bottom: 10px;
+}
+
 #play-area {
   background-color: wheat;
-  position: fixed;
-  height: 600px;
-  width: 600px;
+  height: 604px;
+  width: 604px;
   flex-wrap: wrap;
   margin: 0;
   z-index: 4;
+  border: solid;
+  border-width: 2px;
+  border-color: white;
 }
 
 .information {
-  /* position: relative; */
   text-align: center;
   z-index: 4;
 }
 
 #game-info {
-  font-size: 50px;
+  color: white;
+  font-family: 'DotGothic16', sans-serif;
+  font-size: 25px;
 }
 
 .square {
-  background-color: purple;
+  background-color: white;
   height: 12px;
   width: 12px; 
 }
