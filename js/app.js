@@ -25,6 +25,7 @@ const playBtn = document.getElementById('play-btn')
 const resultMenu = document.getElementById('end-menu')
 const retryBtn = document.getElementById('retry-btn')
 const finalScore = document.getElementById('score')
+const gameInfo = document.getElementsByClassName('information')
 
 
 /*----------------------------- Event Listeners -----------------------------*/
@@ -96,6 +97,7 @@ function generateBoard() {
       gameField.appendChild(square)
       squares.push(document.getElementById(i))
   }
+  gameInfo.style.visibility = 'visible'
 }
   
   function clearBoard() {
@@ -133,13 +135,10 @@ async function moveSnake() {
   checkCollision()
   await checkCollision()
 
-  if (playing === true){
   snake.unshift(newHead)
   snake.pop()
   snakeHead = snake[0]
-  } else if (playing != true){
-    clearTimeout(play)
-  }
+  
 }
 
 function checkCollision() {
@@ -181,6 +180,7 @@ function updateScore() {
 }
 
 function endGame() {
+  clearTimeout(play)
   playing = false
   resultMenu.style.visibility = 'visible'
   resultMenu.style.display = 'grid'
