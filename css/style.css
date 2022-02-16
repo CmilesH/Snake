@@ -81,13 +81,27 @@ body {
   z-index: 5;
 }
 
+#title{
+  width: 500px;
+  height: 500px;
+  font-family: 'DotGothic16', sans-serif;
+  position: fixed;
+  font-size: 50px;
+  text-align: center;
+}
 #main-menu {
   position: fixed;
   margin: auto;
-  width: 100px;
+  width: 400px;
   height: 100px;
   align-items: center;
   padding-top: 45px;
+}
+
+#play-btn {
+  width: 170px;
+  height: 55px;
+  background-image: url('https://i.ibb.co/7QzWC8Q/playBtn.png');
 }
 
 #end-menu {

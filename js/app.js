@@ -25,7 +25,7 @@ const resultMenu = document.getElementById('end-menu')
 const retryBtn = document.getElementById('retry-btn')
 const finalScore = document.getElementById('score')
 const scoreInfo = document.getElementById('score-info')
-
+const title = document.getElementById('title')
 
 /*----------------------------- Event Listeners -----------------------------*/
 
@@ -36,6 +36,7 @@ keyPress = document.addEventListener('keydown', (e) => {
 playBtn.addEventListener('click', function() {
   gameField.style.display = 'flex'
   playBtn.style.visibility = 'hidden'
+  title.style.visibility = 'hidden'
   playing = true
   init()
 
