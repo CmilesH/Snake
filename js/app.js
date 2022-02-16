@@ -7,7 +7,6 @@ const snakeColor = 'white'
 
 let snake = []
 let apple 
-let appleColor 
 let snakeHead 
 let movement
 let direction = ''
@@ -183,6 +182,6 @@ function endGame() {
   clearTimeout(play)
   playing = false
   resultMenu.style.visibility = 'visible'
-  resultMenu.style.display = 'grid'
+  resultMenu.style.display = 'flex'
   finalScore.textContent = `Final Score: ${score}`
 }

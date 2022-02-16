@@ -33,22 +33,8 @@ body {
 #game-window {
   position: fixed;
   z-index: 3;
-  /* background-color: black;
-  width: 605px;
-  height: 650px; */
   margin-bottom: 25px;
   z-index: 3;
-}
-
-/* #window-background {
-  background-color: black;
-  width: 605px;
-  height: 650px;
-  position: fixed;
-} */
-
-#game-window > img {
-  z-index: 2
 }
 
 #play-area {
@@ -105,22 +91,28 @@ body {
 }
 
 #end-menu {
+  flex-direction: column;
   background-color: white;
-  border: solid;
+  background-image: url('https://i.ibb.co/9YXTLmf/End-Wndow.png');
+  align-items: center;
+  justify-content: center;
   position: fixed;
-  height: 300px;
-  width: 300px;
+  height: 119px;
+  width: 298px;
 }
 
 #score {
   margin: auto;
-  font-size: 40px;
+  font-size: 20px;
   z-index: 5;
 }
 
 #retry-btn {
-  height: 20px;
+  background-image: url('https://i.ibb.co/nR4TXJ2/Retry.png');
+  height: 25px;
+  width: 80px;
   z-index: 5;
+  margin-bottom: 10px;
 }
 
 #background {
