@@ -8,6 +8,8 @@
 [Click here to play!](https://cmilesh.github.io/Snake/)
 ---
 
+Take a trip to the past as you play a classic game of Snake!
+
 ---
 
 ## Technologies Used:
