@@ -1,5 +1,5 @@
 
-# <center>**SNAKE** 🐍</center>
+# **SNAKE** 🐍
 
 *A classic game with a nostalgic look*
 
@@ -12,13 +12,13 @@
 
 Technologies Used:
 
-- <font color=yellow>***JavaScript***</font>
-- <font color="orange">***HTML***</font>
-- <font color="cyan">***CSS***</font>
+- ***JavaScript***
+- ***HTML***
+- ***CSS***<
 
 ---
 
-## <font color="white">Icebox</font>
+## Icebox
 
 - Highscores
 - Make window interactable
