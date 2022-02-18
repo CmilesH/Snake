@@ -22,6 +22,10 @@ Take a trip to the past as you play a classic game of Snake!
 
 ---
 
+Icons are by Microsoft's Windows 98 OS
+
+---
+
 ## Icebox
 
 - Highscores
